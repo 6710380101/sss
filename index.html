@@ -269,8 +269,30 @@
     .f1-sub {
       font-size: 26px;
       color: #e2effa;
-      margin-bottom: 35px;
+      margin-bottom: 22px;
     }
+
+    .student-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .student-form input {
+      font-family: inherit;
+      font-size: 18px;
+      padding: 10px 14px;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      outline: none;
+      color: #10263f;
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .student-form input:focus { border-color: var(--btn-orange); }
+    .student-form input.invalid { border-color: #e5484d; }
+    #stu-name { width: 300px; }
+    #stu-no { width: 110px; }
 
     .btn-start {
       background: var(--btn-orange);
@@ -655,6 +677,31 @@
       to { transform: translateY(0) scale(1); opacity: 1; }
     }
 
+    /* Frame 11: Feedback page */
+    .fb-page {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .fb-icon {
+      width: 90px; height: 90px; border-radius: 45px;
+      background: #E3F1FB; font-size: 46px;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .btn-form-link {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--btn-orange); color: #10263f;
+      font-size: 26px; font-weight: 700; text-decoration: none;
+      padding: 14px 40px; border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(242, 140, 40, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .btn-form-link:hover { transform: scale(1.05); }
+
     /* Frame 10: Summary & Reflection */
     .f10-grid {
       display: grid;
@@ -741,6 +788,10 @@
           <div class="f1-badge">สื่อบทเรียนดิจิทัลมัลติมีเดียแบบมีปฏิสัมพันธ์</div>
           <h1 class="f1-title">วิเคราะห์อัลกอริทึม<br>และการแยกย่อยปัญหา</h1>
           <div class="f1-sub">วิชาวิทยาการคำนวณ ชั้นมัธยมศึกษาปีที่ 4</div>
+          <div class="student-form">
+            <input type="text" id="stu-name" placeholder="ชื่อ-นามสกุล" autocomplete="off">
+            <input type="text" id="stu-no" placeholder="เลขที่" inputmode="numeric" autocomplete="off">
+          </div>
           <button class="btn-start" onclick="startCourse()">เริ่มเรียน ➜</button>
           <div style="margin-top: 40px; font-size: 16px; color: #a5c7e8;">
             สื่อการเรียนรู้ตามหลักสูตรแกนกลาง สสวท. | ADDIE Model Instructional Media
@@ -1004,12 +1055,28 @@
 
         <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:15px; border-top:1px solid #dce7f0;">
           <a class="nav-btn btn-prev" style="text-decoration:none;" href="worksheet_sandwich_algorithm.pdf" download="ใบงานกลุ่ม_แซนด์วิชทอด.pdf" onclick="playClick()">📥 ดาวน์โหลดใบงานกลุ่ม: แซนด์วิชทอด</a>
-          <button class="nav-btn btn-next" id="btn-to-posttest" onclick="goToPostTest()" disabled>ไปทำแบบทดสอบหลังเรียน 🔒</button>
+          <button class="nav-btn btn-next" id="btn-to-posttest" onclick="goToPostTest()" disabled>ไปประเมินความพึงพอใจ 🔒</button>
         </div>
       </div>
 
-      <!-- FRAME 9: Post-test -->
-      <div id="frame-9" class="frame-card">
+      <!-- FRAME 9: Feedback (Google Form) -->
+      <div id="frame-9" class="frame-card fb-page">
+        <div class="fb-icon">📝</div>
+        <h2 style="font-size: 30px; color: var(--primary-navy); margin-bottom: 10px;">ประเมินความพึงพอใจต่อบทเรียน</h2>
+        <p style="font-size: 18px; color: #4a5f73; line-height: 1.7; max-width: 560px; margin-bottom: 26px;">
+          เรียนมาถึงช่วงท้ายของบทเรียนแล้ว<br>
+          ช่วยตอบแบบประเมินสั้นๆ เพื่อบอกเราว่าบทเรียนนี้เป็นอย่างไร<br>
+          ความเห็นของเธอจะช่วยให้เราปรับปรุงสื่อให้ดียิ่งขึ้น
+        </p>
+        <a class="btn-form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSfBxPT4vgRPajxwap6m8OIRVjEa3ecMNnMprCI6g_a7EmeH8A/viewform" target="_blank" rel="noopener" onclick="playDing()">
+          <span>📋</span> เปิดแบบประเมิน (Google Form) ➜
+        </a>
+        <p style="font-size: 14px; color: #7b8895; margin-top: 14px;">ลิงก์จะเปิดในแท็บใหม่ ใช้เวลาประมาณ 2-3 นาที ตอบเสร็จแล้วกลับมาที่หน้านี้เพื่อทำแบบทดสอบต่อ</p>
+        <button class="nav-btn btn-next" style="margin-top: 22px;" onclick="goToFrame(10)">ไปทำแบบทดสอบหลังเรียน ➔</button>
+      </div>
+
+      <!-- FRAME 10: Post-test -->
+      <div id="frame-10" class="frame-card">
         <div class="quiz-container">
           <div>
             <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -1028,8 +1095,8 @@
         </div>
       </div>
 
-      <!-- FRAME 10: Summary & Reflection -->
-      <div id="frame-10" class="frame-card">
+      <!-- FRAME 11: Summary & Reflection -->
+      <div id="frame-11" class="frame-card">
         <h2 style="font-size: 24px; color: var(--primary-navy); margin-bottom: 15px;">สรุปผลคะแนนและการสะท้อนคิด (Reflection)</h2>
         <div class="f10-grid">
           
@@ -1067,7 +1134,7 @@
               <textarea class="reflection-textarea" id="reflection-text" placeholder="พิมพ์ข้อความสะท้อนคิดที่นี่..."></textarea>
             </div>
             <div style="display:flex; gap:10px; margin-top:10px;">
-              <button class="nav-btn btn-next" style="flex:1;" onclick="submitReflection()">ส่งบันทึกไปที่ Google Classroom</button>
+              <button class="nav-btn btn-next" style="flex:1;" onclick="submitReflection()">ส่งคะแนนและบันทึกสะท้อนคิด</button>
               <button class="nav-btn btn-prev" style="min-width:auto;" onclick="finishAll()">จบการเรียน 🏁</button>
             </div>
           </div>
@@ -1092,7 +1159,8 @@
         <div class="step-dot" id="dot-8"></div>
         <div class="step-dot" id="dot-9"></div>
         <div class="step-dot" id="dot-10"></div>
-        <span class="frame-label" id="frame-stepper-label">เฟรม 2/10</span>
+        <div class="step-dot" id="dot-11"></div>
+        <span class="frame-label" id="frame-stepper-label">เฟรม 2/11</span>
       </div>
 
       <button class="nav-btn btn-next" id="btn-forward" onclick="navigateStep(1)">ถัดไป ❯</button>
@@ -1132,6 +1200,29 @@
     let soundEnabled = true;
     let preScore = 0;
     let postScore = 0;
+        let student = { name: '', no: '' };
+
+    /* ================= SEND SCORES TO GOOGLE SHEETS (open in Excel) ================= */
+    // วาง URL ของ Google Apps Script Web App ตรงนี้ (ลงท้ายด้วย /exec)
+    const SCORE_ENDPOINT = "https://script.google.com/macros/s/AKfycbxMnAzmd543qowDs-mqlvTK-G9xdsesb_J2_Y_cw3SEYXIxYw4kEHDgHsXYfsqI32gEFw/exec";
+
+    function sendScore(eventName, extra = {}) {
+      if (!SCORE_ENDPOINT) { console.warn('SCORE_ENDPOINT ยังไม่ได้ตั้งค่า - ไม่ได้ส่งคะแนน'); return; }
+      const payload = Object.assign({
+        event: eventName,            // 'ก่อน' | 'หลัง' | 'สะท้อนคิด'
+        name: student.name,
+        no: student.no,
+        score: eventName === 'ก่อน' ? preScore : postScore
+      }, extra);
+      try {
+        fetch(SCORE_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        }).catch(err => console.warn('ส่งคะแนนไม่สำเร็จ', err));
+      } catch (err) { console.warn('ส่งคะแนนไม่สำเร็จ', err); }
+    }
 
     /* Sound Synthesizer via Web Audio API (No External Audio Asset Required) */
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1165,7 +1256,7 @@
     /* ================= NAVIGATION CONTROLLER ================= */
     function goToFrame(frameNum) {
       // Validate bounds
-      if (frameNum < 1 || frameNum > 10) return;
+      if (frameNum < 1 || frameNum > 11) return;
       
       // Update UI active card
       document.querySelectorAll('.frame-card').forEach(f => f.classList.remove('active'));
@@ -1193,8 +1284,9 @@
           6: "หน่วยที่ 2: Pattern & Abstraction",
           7: "หน่วยที่ 3: Algorithm & Flowchart",
           8: "มินิเกมและใบงานกลุ่ม",
-          9: "แบบทดสอบหลังเรียน (Post-test)",
-          10: "สรุปผลและส่งงาน (Reflection)"
+          9: "ประเมินความพึงพอใจ (Feedback)",
+          10: "แบบทดสอบหลังเรียน (Post-test)",
+          11: "สรุปผลและส่งงาน (Reflection)"
         };
         headerTitle.textContent = titles[frameNum] || "วิเคราะห์อัลกอริทึมและการแยกย่อยปัญหา";
       }
@@ -1203,15 +1295,15 @@
       if (frameNum === 2) triggerFrame2Animations();
       if (frameNum === 3) startPreTest();
       if (frameNum === 4) refreshMenu();
-      if (frameNum === 9) startPostTest();
-      if (frameNum === 10) renderSummary();
+      if (frameNum === 10) startPostTest();
+      if (frameNum === 11) renderSummary();
 
       playClick();
     }
 
     function updateStepper(frame) {
-      document.getElementById('frame-stepper-label').textContent = `เฟรม ${frame}/10`;
-      for (let i = 1; i <= 10; i++) {
+      document.getElementById('frame-stepper-label').textContent = `เฟรม ${frame}/11`;
+      for (let i = 1; i <= 11; i++) {
         const dot = document.getElementById(`dot-${i}`);
         if (!dot) continue;
         dot.className = 'step-dot';
@@ -1224,7 +1316,7 @@
       const btnFwd = document.getElementById('btn-forward');
 
       // Disable forward on menu/quiz frames to enforce proper paths
-      if ([1, 3, 4, 8, 9, 10].includes(frame)) {
+      if ([1, 3, 4, 8, 10, 11].includes(frame)) {
         btnFwd.disabled = true;
       } else {
         btnFwd.disabled = false;
@@ -1242,6 +1334,19 @@
     }
 
     function startCourse() {
+      const nameEl = document.getElementById('stu-name');
+      const noEl = document.getElementById('stu-no');
+      let ok = true;
+      [nameEl, noEl].forEach(el => {
+        const empty = !el.value.trim();
+        el.classList.toggle('invalid', empty);
+        if (empty) ok = false;
+      });
+      if (!ok) {
+        alert('กรุณากรอก ชื่อ-นามสกุล และเลขที่ ก่อนเริ่มเรียน');
+        return;
+      }
+      student = { name: nameEl.value.trim(), no: noEl.value.trim() };
       if (audioCtx.state === 'suspended') audioCtx.resume();
       goToFrame(2);
     }
@@ -1410,6 +1515,7 @@
         renderPreQuestion();
       } else {
         playDing();
+        sendScore('ก่อน');
         goToFrame(4); // Move to Main Menu
       }
     }
@@ -1540,7 +1646,7 @@
         if (matchCount === 5) {
           const btnPost = document.getElementById('btn-to-posttest');
           btnPost.disabled = false;
-          btnPost.textContent = 'ไปทำแบบทดสอบหลังเรียน ➔';
+          btnPost.textContent = 'ไปประเมินความพึงพอใจ ➔';
           btnPost.style.backgroundColor = 'var(--btn-orange)';
           playDing();
         }
@@ -1553,10 +1659,10 @@
     }
 
     function goToPostTest() {
-      goToFrame(9);
+      goToFrame(9); // หน้าประเมินความพึงพอใจ ก่อนทำแบบทดสอบหลังเรียน
     }
 
-    /* ================= POST-TEST & RETRY (FRAME 9 & 9.1) ================= */
+    /* ================= POST-TEST & RETRY (FRAME 10 & retry modal) ================= */
     let postCurrentIdx = 0;
     let postSelectedAns = null;
 
@@ -1604,9 +1710,10 @@
         renderPostQuestion();
       } else {
         // Evaluate score against 70% threshold (7 of 10)
+        sendScore('หลัง');
         if (postScore >= 7) {
           playDing();
-          goToFrame(10);
+          goToFrame(11);
         } else {
           playBuzz();
           showRetryModal();
@@ -1625,7 +1732,7 @@
       goToFrame(4);
     }
 
-    /* ================= FRAME 10: SUMMARY & REFLECTION ================= */
+    /* ================= FRAME 11: SUMMARY & REFLECTION ================= */
     function renderSummary() {
       document.getElementById('final-score-val').textContent = `${postScore}/10`;
       const pct = (postScore / 10) * 100;
@@ -1642,7 +1749,8 @@
         return;
       }
       playDing();
-      alert("✓ บันทึกสะท้อนคิดถูกส่งไปยังระบบห้องเรียน Google Classroom เรียบร้อยแล้ว!");
+      sendScore('สะท้อนคิด', { reflection: txt });
+      alert("✓ ส่งบันทึกสะท้อนคิดและคะแนนเรียบร้อยแล้ว!");
     }
 
     function finishAll() {
